@@ -638,6 +638,61 @@ class ExpressionParser {
         for (let i = 2; i <= n; i++) { const c = a + b; a = b; b = c; }
         return b;
       }
+      case 'gamma': {
+        const z = args[0];
+        if (z < 0.5) {
+          return Math.PI / (Math.sin(Math.PI * z) * this.evaluateFunction('gamma', [1 - z]));
+        }
+        const g = 7;
+        const c = [
+          0.99999999999980993,
+          676.5203681218851,
+          -1259.1392167224028,
+          771.32342877765313,
+          -176.61502916214059,
+          12.507343278686905,
+          -0.13857109526572012,
+          9.9843695780195716e-6,
+          1.5056327351493116e-7,
+        ];
+        const zm1 = z - 1;
+        let x = c[0];
+        for (let i = 1; i < g + 2; i++) {
+          x += c[i] / (zm1 + i);
+        }
+        const t = zm1 + g + 0.5;
+        return Math.sqrt(2 * Math.PI) * Math.pow(t, zm1 + 0.5) * Math.exp(-t) * x;
+      }
+      case 'lgamma': return Math.log(Math.abs(this.evaluateFunction('gamma', args)));
+      case 'erf': {
+        const x = args[0];
+        const sign = x < 0 ? -1 : 1;
+        const absX = Math.abs(x);
+        const a1 = 0.254829592;
+        const a2 = -0.284496736;
+        const a3 = 1.421413741;
+        const a4 = -1.453152027;
+        const a5 = 1.061405429;
+        const p = 0.3275911;
+        const t = 1.0 / (1.0 + p * absX);
+        const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-absX * absX);
+        return sign * y;
+      }
+      case 'erfc': return 1.0 - this.evaluateFunction('erf', args);
+      case 'phi':
+      case 'totient': {
+        let n = Math.round(args[0]);
+        if (n <= 0) return 0;
+        let res = n;
+        for (let p = 2; p * p <= n; p++) {
+          if (n % p === 0) {
+            while (n % p === 0) n /= p;
+            res -= res / p;
+          }
+        }
+        if (n > 1) res -= res / n;
+        return res;
+      }
       case 'min': return Math.min(...args);
       case 'max': return Math.max(...args);
       case 'fx': return this.evaluateSavedFunction(this.engine.fxDefinition, args[0]);

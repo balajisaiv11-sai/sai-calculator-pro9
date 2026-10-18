@@ -55,14 +55,22 @@ export const ToolsSheet: React.FC<ToolsSheetProps> = ({
           { name: 'Determinant', notation: 'det(', description: 'Calculate determinant' },
           { name: 'Inverse', notation: 'inv(', description: 'Matrix inverse' },
           { name: 'Transpose', notation: 'trn(', description: 'Matrix transpose' },
-          { name: 'Identity Matrix', notation: 'Identity(3)', description: '3x3 identity matrix' },
+          { name: 'Trace', notation: 'tr(', description: 'Matrix trace (sum of diagonal)' },
+          { name: 'RREF', notation: 'rref(', description: 'Reduced Row Echelon Form' },
+          { name: 'Matrix Rank', notation: 'rank(', description: 'Matrix rank' },
+          { name: 'Identity Matrix 4×4', notation: 'Identity(4)', description: '4×4 identity matrix' },
+          { name: 'Identity Matrix 3×3', notation: 'Identity(3)', description: '3×3 identity matrix' },
+          { name: 'MatA', notation: 'MatA', description: 'Matrix variable A' },
+          { name: 'MatB', notation: 'MatB', description: 'Matrix variable B' },
         ];
       case 'VECTOR':
         return [
-          { name: 'Dot Product', notation: 'dot(', description: 'Scalar dot product' },
-          { name: 'Cross Product', notation: 'cross(', description: 'Vector cross product' },
-          { name: 'Vector Magnitude', notation: 'norm(', description: 'Vector norm/magnitude' },
-          { name: 'Unit Vector', notation: 'unit(', description: 'Normalized unit vector' },
+          { name: 'Dot Product', notation: 'dot(', description: 'Scalar dot product (A • B)' },
+          { name: 'Cross Product', notation: 'cross(', description: 'Vector cross product (A × B)' },
+          { name: 'Vector Magnitude', notation: 'norm(', description: 'Vector norm/magnitude |v|' },
+          { name: 'Unit Vector', notation: 'unit(', description: 'Normalized unit vector v/|v|' },
+          { name: 'Vector Projection', notation: 'proj(', description: 'Projection of A onto B' },
+          { name: 'Angle Between', notation: 'angle(', description: 'Angle between vectors in degrees' },
         ];
       default:
         return [

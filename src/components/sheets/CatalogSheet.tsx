@@ -14,21 +14,11 @@ export const CatalogSheet: React.FC<CatalogSheetProps> = ({
   onInsertToken,
   onDismiss,
 }) => {
-  const categories = [
-    'Arithmetic',
-    'Powers & Roots',
-    'Trigonometry',
-    'Hyperbolic',
-    'Logarithms',
-    'Calculus',
-    'Combinatorics',
-    'Numeric',
-    'Scientific Constants',
-    'Unit Conversion',
-    'Engineering Symbols',
-  ];
+  const categories = React.useMemo(() => {
+    return Array.from(new Set(FunctionRegistry.allFunctions.map((fn) => fn.category)));
+  }, []);
 
-  const [selectedCat, setSelectedCat] = useState(categories[0]);
+  const [selectedCat, setSelectedCat] = useState('Arithmetic');
   const [query, setQuery] = useState('');
 
   const items = FunctionRegistry.allFunctions.filter((fn) => {

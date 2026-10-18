@@ -1,6 +1,9 @@
+import { Fraction } from './fraction';
+
 /**
  * 2D and 3D Vector calculation engine.
- * Dot Product, Cross Product, Magnitude, Unit Vector, Angle between vectors.
+ * Dot Product, Cross Product, Magnitude, Unit Vector, Projection, Angle between vectors,
+ * Vector addition, subtraction, scalar multiplication, and dual Decimal/Fraction formatting.
  */
 export class VectorEngine {
   static dot(a: number[], b: number[]): number {
@@ -52,5 +55,41 @@ export class VectorEngine {
   static subtract(a: number[], b: number[]): number[] {
     if (a.length !== b.length) throw new Error('Vectors must have same dimension');
     return a.map((v, i) => v - b[i]);
+  }
+
+  static scalarMultiply(a: number[], scalar: number): number[] {
+    return a.map(v => v * scalar);
+  }
+
+  /**
+   * Vector projection of vector a onto vector b: proj_b(a) = ((a • b) / |b|²) * b
+   */
+  static projection(a: number[], b: number[]): number[] {
+    const dotBB = this.dot(b, b);
+    if (dotBB < 1e-12) {
+      throw new Error('Cannot project onto zero vector');
+    }
+    const scalar = this.dot(a, b) / dotBB;
+    return this.scalarMultiply(b, scalar);
+  }
+
+  /**
+   * Formats a single number into dual decimal and fraction representations.
+   */
+  static formatNumber(val: number): { decimal: string; fraction: string } {
+    if (Math.abs(val) < 1e-12) return { decimal: '0', fraction: '0' };
+    if (Math.abs(val - Math.round(val)) < 1e-10) {
+      const s = Math.round(val).toString();
+      return { decimal: s, fraction: s };
+    }
+    let fracStr = '';
+    try {
+      const frac = Fraction.fromDouble(val, 100000);
+      fracStr = frac.toString();
+    } catch {
+      fracStr = val.toFixed(4).replace(/\.?0+$/, '');
+    }
+    const decStr = val.toFixed(4).replace(/\.?0+$/, '');
+    return { decimal: decStr, fraction: fracStr || decStr };
   }
 }

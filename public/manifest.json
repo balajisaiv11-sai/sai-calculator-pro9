@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "Sai Calculator Pro",
+  "short_name": "SaiCalcPro",
+  "description": "Comprehensive scientific calculator with 540+ functions, natural textbook display, and advanced modes.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#0F172A",
+  "categories": ["education", "utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/calc-icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/calc-icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

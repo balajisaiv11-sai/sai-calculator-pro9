@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/calc-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sai Calculator Pro</title>
+    <meta name="description" content="Comprehensive scientific calculator with 540+ functions, natural textbook display, and advanced modes." />
+    <meta property="og:title" content="Sai Calculator Pro" />
+    <meta property="og:description" content="Comprehensive scientific calculator with 540+ functions, natural textbook display, and advanced modes." />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0F172A" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

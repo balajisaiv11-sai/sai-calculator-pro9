@@ -40,6 +40,7 @@ import {
   Settings as SettingsIcon,
   Sparkles,
   Monitor,
+  Download,
 } from 'lucide-react';
 
 export type ActiveSheetType =
@@ -472,14 +473,14 @@ export const App: React.FC = () => {
               <HistoryIcon className="w-4 h-4" />
             </button>
 
-            {/* Desktop .EXE Button */}
+            {/* Direct Download .EXE Application Button */}
             <button
               onClick={() => setActiveSheet('DESKTOP_EXE')}
-              className="h-8 px-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 font-bold font-mono text-xs flex items-center space-x-1 border border-blue-500/30 transition cursor-pointer"
-              title="Desktop .EXE App & Windows Standalone Launcher"
+              className="h-8 px-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold font-mono text-xs flex items-center space-x-1.5 shadow-md shadow-blue-600/30 transition cursor-pointer"
+              title="Download Windows .EXE Application for Laptop (100% Offline)"
             >
-              <Monitor className="w-3.5 h-3.5" />
-              <span className="text-[10px] font-bold tracking-tight">.EXE</span>
+              <Download className="w-3.5 h-3.5" />
+              <span className="text-[11px] font-bold tracking-tight">EXE</span>
             </button>
 
             {/* Apps Mode Launcher */}

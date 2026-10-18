@@ -25,6 +25,7 @@ const MIME_TYPES = {
   '.woff2': 'font/woff2',
   '.ttf': 'font/ttf',
   '.webp': 'image/webp',
+  '.exe': 'application/vnd.microsoft.portable-executable',
 };
 
 const server = http.createServer((req, res) => {
@@ -78,6 +79,10 @@ const server = http.createServer((req, res) => {
       res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
     } else {
       res.setHeader('Cache-Control', 'no-cache');
+    }
+
+    if (ext === '.exe') {
+      res.setHeader('Content-Disposition', `attachment; filename="${path.basename(filePath)}"`);
     }
 
     res.writeHead(200, { 'Content-Type': contentType });
